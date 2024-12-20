@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smooth Transition from White to Black</title>
+  <style>
+    /*css,html*/
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      overflow-x: hidden; 
+    }
+    header {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .container {
+      height: 200vh; 
+    }
+    .section {
+      height: 100vh; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: background-color 1s ease, opacity 1s ease, transform 1s ease; 
+    }
+    .section h1, .section p {
+      transition: color 1s ease; 
+      position: relative;
+      z-index: 1;
+    }
+    .white {
+      background-color: white;
+      color: black; 
+    }
+    .black {
+      background-color: black;
+      color: white; 
+      opacity: 0; 
+      transform: translateX(-100%); 
+    }
+    .to-black {
+      background-color: black !important;
+      color: white !important; 
+      opacity: 1 !important;
+      transform: translateX(0) !important; 
+    }
+    .to-white {
+      background-color: white !important;
+      color: black !important; 
+      opacity: 1 !important; 
+      transform: translateX(0) !important; 
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with name -->
+  <header>
+    Chanikya Chowdary Samineni
+  </header>
+  
+  <div class="container">
+    <div class="section white" id="whiteSection">
+      <h1>This is the White Section</h1>
+      <p>Click anywhere to transition to black.</p>
+    </div>
+    <div class="section black" id="blackSection">
+      <h1>This is the Black Section</h1>
+      <p>The transition effect is triggered by clicking.</p>
+    </div>
+  </div>
+
+  <script>
+    /*java script*/
+    let isBlack = false;
+    const whiteSection = document.getElementById('whiteSection');
+    const blackSection = document.getElementById('blackSection');
+    const whiteSectionText = whiteSection.querySelector('h1');
+    const blackSectionText = blackSection.querySelector('h1');
+    const whiteSectionDescription = whiteSection.querySelector('p');
+    const blackSectionDescription = blackSection.querySelector('p');
+    
+    document.body.addEventListener('click', function() {
+      if (!isBlack) {
+        isBlack = true;
+        whiteSection.classList.add('to-black');
+        blackSection.classList.add('to-white');
+        whiteSectionText.textContent = "Black Section";
+        whiteSectionDescription.textContent = "Click anywhere to transition to white.";
+        blackSectionText.textContent = "White Section";
+        blackSectionDescription.textContent = "Click anywhere to transition to black.";
+      } else {
+        isBlack = false;
+        whiteSection.classList.remove('to-black');
+        blackSection.classList.remove('to-white');
+        whiteSectionText.textContent = "White Section";
+        whiteSectionDescription.textContent = "Click anywhere to transition to black.";
+        blackSectionText.textContent = "Black Section";
+        blackSectionDescription.textContent = "The transition effect is triggered by clicking.";
+      }
+    });
+  </script>
+</body>
+</html>
